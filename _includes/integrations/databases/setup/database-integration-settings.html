@@ -1,21 +1,34 @@
 {% assign integration = page %}
 
-{% if integration.db-type == "rds" %}
-  {% assign database-settings = site.data.ui.database-integration-settings-page.rds %}
+{% case integration.db-type %}
+  {% when 'rds' %}
+    {% assign database-settings = site.data.ui.database-integration-settings-page.rds %}
 
-{% elsif integration.db-type == "mssql" %}
-  {% if integration.name == "azure" %}
-    {% assign database-settings = site.data.ui.database-integration-settings-page.azure %}
+  {% when 'mssql' %}
+    {% if integration.name == "azure" %}
+      {% assign database-settings = site.data.ui.database-integration-settings-page.azure %}
+    {% else %}
+      {% assign database-settings = site.data.ui.database-integration-settings-page.mssql %}
+    {% endif %} 
+
+  {% when 'oracle' %}
+    {% assign database-settings = site.data.ui.database-integration-settings-page.oracle %}
+
+  {% when 'postgres' %}
+    {% if integration.name == "heroku" %}
+      {% assign database-settings = site.data.ui.database-integration-settings-page.heroku %}
+    {% else %}
+      {% assign database-settings = site.data.ui.database-integration-settings-page.default %}
+    {% endif %}
+
+  {% when 'mongo' %}
+    {% assign database-settings = site.data.ui.database-integration-settings-page.mongodb %}
+
   {% else %}
-    {% assign database-settings = site.data.ui.database-integration-settings-page.mssql %}
-  {% endif %}
+    {% assign database-settings = site.data.ui.database-integration-settings-page.default %}
 
-{% elsif integration.name == "heroku" %}
-  {% assign database-settings = site.data.ui.database-integration-settings-page.heroku %}
+{% endcase %}
 
-{% else %}
-  {% assign database-settings = site.data.ui.database-integration-settings-page.default %}
-{% endif %}
 
 {% assign default-field = site.data.ui.database-integration-settings-page.default-fields %}
 {% assign default-copy = site.data.ui.database-integration-settings-page.default-copy %}
