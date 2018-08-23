@@ -3,6 +3,8 @@
 {% case page.sidebar %}
     {% when 'embedding-api' %}
         {% assign navigation = site.data.sidebars.embedding-api.all-docs %}
+    {% when 'scripts' %}
+        {% assign navigation = site.data.sidebars.scripts.all-docs %}
     {% else %}
         {% assign navigation = site.data.sidebars.stitchnav.all-docs %}
 {% endcase %}
