@@ -1,0 +1,22 @@
+# -------------------------- #
+#       STITCH SCRIPTS       #
+# -------------------------- #
+
+name: "Stitch Scripts"
+description: "[TODO]"
+icon: "/images/stitch-scripts/.svg"
+
+base: "/stitch-scripts"
+
+introduction: "{{ scripts.base }}"
+getting-started: "{{ scripts.base }}/getting-started"
+scheduling: "{{ scripts.base }}/scheduling"
+memory: "{{ scripts.base }}/memory"
+templates: "{{ scripts.base }}/templates"
+reference: "{{ scripts.base }}/reference"
+
+reference-connections: "{{ scripts.reference }}/connections"
+reference-connection-clients: "{{ scripts.reference }}/connection-clients"
+reference-packages: "{{ scripts.reference }}/packages"
+
+changelog: "{{ scripts.base }}/changelog"

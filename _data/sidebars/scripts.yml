@@ -1,0 +1,38 @@
+all-docs:
+- title: sidebar
+  categories:
+    - title: "Stitch Scripts"
+      url: "{{ scripts.introduction }}"
+      drop-down: false
+
+    - title: "Getting Started"
+      url: "{{ scripts.getting-started }}"
+
+    - title: "Scheduling"
+      url: "{{ scripts.scheduling }}"
+      drop-down: false
+
+    - title: "Memory"
+      url: "{{ scripts.memory }}"
+      drop-down: false
+
+    - title: "Templates"
+      sections:
+        - title: ""
+        - title: ""
+        - title: ""
+
+    - title: "Reference"
+      sections:
+        - title: "Connections"
+          subsections: 
+
+        - title: "Connection clients"
+          url: "{{ scripts.reference-connection-clients }}"
+
+        - title: "Packages"
+          url: "{{ scripts.reference-packages }}"
+
+    - title: "Changelog"
+      url: "{{ scripts.changelog }}"
+      drop-down: false
