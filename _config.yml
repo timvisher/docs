@@ -95,6 +95,8 @@ collections:
    output: true
   saas-integrations:
    output: true
+  stitch-scripts:
+   output: true
   webhook-integrations:
    output: true
   tooltips:
@@ -122,6 +124,13 @@ defaults:
       sidebar: stitchnav
       display-summary: "false"
       toc: false
+
+# Stitch Scripts
+  - scope:
+      type: stitch-scripts
+    values:
+      sidebar: scripts
+      display-summary: "false"
 
 ## Data Structure
   - scope:
