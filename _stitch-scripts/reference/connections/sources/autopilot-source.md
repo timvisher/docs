@@ -5,10 +5,11 @@ layout: scripts
 sidebar: scripts
 
 content-type: "reference"
+category: "connections"
+type: "source"
 
 short-name: "autopilot"
 display-name: "AutoPilot"
-type: "source"
 
 resources:
   - title: "{{ connection.display-name }} API Documentation"
@@ -19,8 +20,11 @@ resources:
     url: ""
     description: ""
 
+summary: |
+  Use the {{ connection.display-name }} client to update your email contacts, lists, and segments.
+
 description: |
-  Use the {{ connection.display-name }} client to update your email contacts, lists, and segments. 
+  {{ connection.summary | flatify }}
 
   The Scripts {{ connection.display-name }} client lightly wraps the {{ connection.display-name }} API by auto-generating an authorization header with your API key and translating relative paths in the API to URLs.
 
