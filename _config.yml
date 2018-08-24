@@ -129,8 +129,10 @@ defaults:
   - scope:
       type: stitch-scripts
     values:
+      layout: general
       sidebar: scripts
       display-summary: "false"
+      feedback: false
 
 ## Data Structure
   - scope:
