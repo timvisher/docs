@@ -1,0 +1,110 @@
+---
+layout: page
+---
+
+{% case page.content-type %}
+    {% when 'reference' %}
+        {% assign connection = page %}
+
+        {{ connection.description | flatify | markdownify }}
+
+        {% if connection.resources %}
+            <h2 id="{{ connection.short-name }}-resources">
+                Resources
+            </h2>
+
+            <table class="attribute-list">
+                {% for resource in connection.resources %}
+                    <tr>
+                        <td class="attribute-name">
+                            <a href="{{ resource.url }}" target="new">{{ resource.title | flatify }}</a>
+                        </td>
+                        <td class="attribute-description">
+                            {{ resource.description | flatify | markdownify }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+        <h2 id="{{ connection.name }}-retrieve-connection">
+            Get connection
+        </h2>
+
+{% capture retrieve-connection %}
+{{ connection.short-name }} = connections['{{ connection.short-name }}']['client']
+{% endcapture %}
+
+{% highlight python %}
+{{ retrieve-connection | flatify }}
+{% endhighlight %}
+
+        <h2 id="{{ connection.name }}-query-example">
+            Query {{ connection.display-name }}
+        </h2>
+
+{% highlight python %}
+{{ retrieve-connection | flatify }}
+
+{{ connection.query | flatify }}
+{% endhighlight %}
+
+    {% else %}
+
+
+<!-- For regular content sections -->
+    {% if page.introduction %}
+        {{ page.introduction | flatify | markdownify }}
+
+        <hr>
+    {% endif %}
+
+        {% for section in page.sections %}
+            {% if section.title %}
+                <h2 id="{{ section.anchor }}">
+                    {% case page.content-type %}
+                        {% when 'tutorial' %}
+                            Step {{ forloop.index }}: {{ section.title | flatify }}
+                            
+                            {% capture top-level-step %}
+                                {{ forloop.index }}
+                            {% endcapture %}
+                        {% else %}
+                            {{ section.title | flatify }}
+                    {% endcase %}
+                </h2>
+            {% endif %}
+
+            {{ section.content | flatify | markdownify }}
+
+            {% if section.subsections %}
+                {% for subsection in section.subsections %}
+                    {% if subsection.title %}
+                        <h3 id="{{ subsection.anchor }}">
+                            {% case page.content-type %}
+                                {% when 'tutorial' %}
+                                    Step {{ top-level-step | strip }}.{{ forloop.index }}: {{ subsection.title | flatify }}
+                                {% else %}
+                                    {{ subsection.title | flatify }}
+                            {% endcase %}
+                        </h3>
+                    {% endif %}
+
+                    {{ subsection.content | flatify | markdownify }}
+
+                    {% if subsection.steps %}
+                        {% for step in subsection.steps %}
+                            <h4 id="{{ step.anchor }}">
+                                Step {{ forloop.index }}: {{ step.title }}
+                            </h4>
+
+                            {{ step.content | flatify | markdownify }}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% unless forloop.last == true %}
+            <hr>
+            {% endunless %}
+        {% endfor %}
+{% endcase %}
